@@ -16,11 +16,12 @@ export default {
         this.setItemsId();
     },
     props:{
-        items: []
+        items: [],
+        value : String,
     },
     data: () =>({
         elements: [],
-        answer: Number,
+        answer: String,
     }),
     
     methods:{
@@ -28,7 +29,7 @@ export default {
             return {id, item};
         },
         returnAnswer(){
-            this.$emit('changed', this.answer);
+            this.$emit('input', this.items[this.answer]);
         },
         setItemsId(){
             let counter = 0;
