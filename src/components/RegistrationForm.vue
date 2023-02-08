@@ -7,6 +7,8 @@
     <my-date-picker v-model="date"  label="Дата рождения"></my-date-picker>
     <my-radio-group v-model="sex" :items="['М', 'Ж']"></my-radio-group>
     <v-select v-model="group" label="Выберите группу" :items="groupArray"/>
+    <v-checkbox v-model="enableSMS" label="Получать СМС уведомления"/>
+    <v-btn color="primary">Отправить</v-btn>
   </v-form>
 </template>
 
@@ -27,6 +29,7 @@ export default {
     date: "",
     sex : "",
     group: "",
+    enableSMS: false,
     //
   }),
   methods: {
