@@ -1,7 +1,7 @@
 <template>
-    <v-radio-group v-model="answer">
+    <v-radio-group row v-model="answer">
             <v-radio 
-                v-for="item in setItemsId" 
+                v-for="item in elements" 
                 :key="item.id" 
                 :label="item.item"
                 :value="item.id"
@@ -12,30 +12,33 @@
 
 <script>
 export default {
+    mounted(){
+        this.setItemsId();
+    },
     props:{
         items: []
     },
     data: () =>({
         elements: [],
-        asnwer,
+        answer: Number,
     }),
+    
     methods:{
         createElement(id, item){
             return {id, item};
         },
         returnAnswer(){
-            this.$emit('answer', asnwer);
-        }
-    },
-    computed:{
-        setItemsId: function (){
+            this.$emit('changed', this.answer);
+        },
+        setItemsId(){
             let counter = 0;
+            this.elements = [];
             this.items.forEach(element => {
                 this.elements.push(this.createElement(counter, element))
                 counter++;
             });
-            return this.elements;
-        }
-    }
+    },
+    
+}
 }
 </script>

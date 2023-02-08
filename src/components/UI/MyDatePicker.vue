@@ -36,7 +36,7 @@
           <v-btn
             text
             color="purple"
-            @click="$refs.menu.save(date)"
+            @click="setDate"
           >
             OK
           </v-btn>
@@ -46,6 +46,9 @@
 
 <script>
 export default {
+    mounted(){
+      this.setDate();
+    },
     props: {
         label: String,
     },
@@ -53,5 +56,11 @@ export default {
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       menu: false,
     }),
+    methods:{
+      setDate(){
+        this.$refs.menu.save(this.date);
+        this.$emit('changed', this.date)
+      }
+    }
 }
 </script>
