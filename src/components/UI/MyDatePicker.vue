@@ -18,10 +18,10 @@
         v-on="on"
       ></v-text-field>
     </template>
-    <v-date-picker color="primary" v-model="date" no-title scrollable >
+    <v-date-picker :max="maxDate" color="primary" v-model="date" no-title scrollable>
       <v-spacer></v-spacer>
-      <v-btn text  @click="menu = false"> Cancel </v-btn>
-      <v-btn text  @click="setDate"> OK </v-btn>
+      <v-btn text @click="menu = false"> Cancel </v-btn>
+      <v-btn text @click="setDate"> OK </v-btn>
     </v-date-picker>
   </v-menu>
 </template>
@@ -34,11 +34,10 @@ export default {
   props: {
     label: String,
     value: String,
+    maxDate: String,
   },
   data: () => ({
-    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-      .toISOString()
-      .substr(0, 10),
+    date: new Date(Date.now() - 1000*60*60*24).toISOString().substr(0, 10),
     menu: false,
   }),
   methods: {
