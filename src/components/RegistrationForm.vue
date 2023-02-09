@@ -35,7 +35,7 @@
     <my-radio-group v-model="data.sex" :items="['М', 'Ж']"></my-radio-group>
     <v-select v-model="data.group" label="Выберите группу" :items="groupArray" />
     <v-checkbox v-model="data.enableSMS" label="Получать СМС уведомления" />
-    <v-btn color="primary" @click="sendForm">Отправить</v-btn>
+    <v-btn :loading="btnLoading" color="primary" @click="sendForm">Отправить</v-btn>
   </v-form>
 </template>
 
@@ -46,6 +46,7 @@ import axios from "@/plugins/axios"
 export default {
   components: { MyDatePicker, MyRadioGroup },
   data: () => ({
+    btnLoading : false,
     groupArray: ["VIP", "Проблемные", "ОМС"],
     rules: {
       required: (value) => !!value || "Обязательно для заполнения",
@@ -70,11 +71,26 @@ export default {
   methods: {
     sendForm(){
       if(this.$refs.form.validate()){
+        this.btnLoading = true;
         axios.post('/saveRecord', this.data)
-        .then(res => {console.log(res)})
+        .then(res => {
+          console.log(res); 
+          this.btnLoading = false;
+          this.clearData();
+          })
         .catch(rej => {console.log(rej)});
       }
       
+    },
+    clearData(){
+      this.data.name = "";
+      this.data.surname = "";
+      this.data.lastname= "";
+      this.data.email= "";
+      this.data.date = this.yesterday;
+      this.data.sex= "";
+      this.data.group = null;
+      this.data.enableSMS = true;
     }
   },
 };
