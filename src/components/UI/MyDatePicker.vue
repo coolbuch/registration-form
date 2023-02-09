@@ -12,9 +12,10 @@
       <v-text-field
         v-model="date"
         :label="label"
-        prepend-icon="mdi-calendar"
         readonly
+        required
         v-bind="attrs"
+        :rules="[v => !!v || 'Обязательно для заполнения']"
         v-on="on"
       ></v-text-field>
     </template>
@@ -37,7 +38,7 @@ export default {
     maxDate: String,
   },
   data: () => ({
-    date: new Date(Date.now() - 1000*60*60*24).toISOString().substr(0, 10),
+    date: "",
     menu: false,
   }),
   methods: {

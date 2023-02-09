@@ -1,6 +1,7 @@
 <template>
-    <v-radio-group row v-model="answer">
+    <v-radio-group  label="Пол:" row v-model="answer" >
             <v-radio 
+                align="center"
                 v-for="item in elements" 
                 :key="item.id" 
                 :label="item.item"

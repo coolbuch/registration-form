@@ -4,8 +4,8 @@
       <v-app-bar-title>Регистрация клиента</v-app-bar-title>
     </v-app-bar>
     <v-main>
-      <v-container fluid>
-        <registration-form></registration-form>
+      <v-container fluid >
+              <registration-form ></registration-form>
       </v-container>
     </v-main>
   </v-app>
@@ -26,3 +26,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+</style>
