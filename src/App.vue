@@ -1,31 +1,33 @@
 <template>
   <v-app>
     <v-app-bar app color="primary"  dark>
-      <v-app-bar-title>Регистрация клиента</v-app-bar-title>
+      <v-app-bar-title>{{title}}</v-app-bar-title>
       <v-spacer/>
-      <v-btn v-if="page != 'records'" text>Все записи</v-btn>
-      <v-btn v-if="page != 'home'" text>Регистрация</v-btn>
+      <v-btn to="/records" text v-if="title === 'Регистрация'" >Все записи</v-btn>
+      <v-btn to="/" text v-if="title === 'Записи'" >Регистрация</v-btn>
     </v-app-bar>
     <v-main>
       <v-container fluid >
-              <registration-form ></registration-form>
+            <router-view @titleChange="(e) => {title = e}">
+            </router-view>
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import RegistrationForm from '@/components/RegistrationForm.vue';
 export default {
   name: "App",
 
-  components: {RegistrationForm},
+  components: {},
 
   data: () => ({
-    page: "home",
+    title: "",
   }),
   methods:{
     
+  },
+  mounted(){
   }
 };
 </script>
@@ -36,4 +38,5 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 </style>

@@ -135,5 +135,8 @@ export default {
       this.data.enableSMS = true;
     },
   },
+  mounted(){
+    this.$emit("titleChange", "Регистрация");
+  }
 };
 </script>
