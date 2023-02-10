@@ -2,6 +2,9 @@
   <v-app>
     <v-app-bar app color="primary"  dark>
       <v-app-bar-title>Регистрация клиента</v-app-bar-title>
+      <v-spacer/>
+      <v-btn v-if="page != 'records'" text>Все записи</v-btn>
+      <v-btn v-if="page != 'home'" text>Регистрация</v-btn>
     </v-app-bar>
     <v-main>
       <v-container fluid >
@@ -19,7 +22,7 @@ export default {
   components: {RegistrationForm},
 
   data: () => ({
-   
+    page: "home",
   }),
   methods:{
     

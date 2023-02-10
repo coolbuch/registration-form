@@ -58,7 +58,11 @@
       </v-col>
       <v-spacer />
     </v-row>
+    <v-snackbar v-model="snackBar.status" :timeout="3000" :color="snackBar.type" >
+      <div class="text-center"> {{snackBar.text}} </div>
+    </v-snackbar>
   </v-form>
+  
 </template>
 
 <script>
@@ -69,6 +73,7 @@ export default {
   components: { MyDatePicker, MyRadioGroup },
   data: () => ({
     btnLoading: false,
+    snackBar: {status: false, type: "success", text: "Успех"},
     groupArray: ["VIP", "Проблемные", "ОМС"],
     rules: {
       required: (value) => !!value || "Обязательно для заполнения",
@@ -82,13 +87,13 @@ export default {
       .toISOString()
       .substr(0, 10),
     data: {
-      name: "",
-      surname: "",
-      lastname: "",
-      email: "",
+      name: "1",
+      surname: "1",
+      lastname: "1",
+      email: "1@aa.ru",
       date: "",
       sex: "",
-      group: null,
+      group: " ",
       enableSMS: true,
     },
     //
@@ -98,15 +103,25 @@ export default {
       if (this.$refs.form.validate()) {
         this.btnLoading = true;
         axios
-          .post("/saveRecord", this.data)
+          .post("/addrecord", this.data)
           .then((res) => {
             console.log(res);
-            this.btnLoading = false;
+            this.snackBar.status = true;
+            this.snackBar.type = "success";
+            this.snackBar.text = "Успешно";
             this.clearData();
           })
           .catch((rej) => {
+            this.snackBar.status = true;
+            this.snackBar.type = "error";
+            this.snackBar.text = "Произошла ошибка";
             console.log(rej);
-          });
+          })
+          .finally(() => {
+            this.btnLoading = false;
+            this.$refs.form.reset();
+            this.$refs.form.resetValidation()
+          })
       }
     },
     clearData() {
@@ -114,7 +129,7 @@ export default {
       this.data.surname = "";
       this.data.lastname = "";
       this.data.email = "";
-      this.data.date = this.yesterday;
+      this.data.date = "";
       this.data.sex = "";
       this.data.group = null;
       this.data.enableSMS = true;
