@@ -87,13 +87,13 @@ export default {
       .toISOString()
       .substr(0, 10),
     data: {
-      name: "1",
-      surname: "1",
-      lastname: "1",
-      email: "1@aa.ru",
+      name: "",
+      surname: "",
+      lastname: "",
+      email: "",
       date: "",
       sex: "",
-      group: " ",
+      group: "",
       enableSMS: true,
     },
     //
